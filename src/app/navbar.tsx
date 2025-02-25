@@ -25,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
   const { setFilterForm } = useFilter();
   const { filterForm } = useFilter();
 
-  const handleFilterChange = (key: keyof FilterState, value: any) => {
+  const handleFilterChange = (key: keyof FilterState, value: unknown) => {
     setFilterForm((prevFilter) => ({
       ...prevFilter,
       [key]: value,
