@@ -1,101 +1,90 @@
-import Image from "next/image";
+"use client";
+
+import Navbar from "./navbar";
+import coast from "../../public/DSC_0753.jpg";
+import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { tourPackages } from "./Data/DummyData";
+import { useState } from "react";
+import { FilterState } from "./contexts/FilterContext";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const currency = "THB";
+  const [filteredPackages, setFilteredPackages] = useState(tourPackages);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  const handleSearch = (filters: FilterState) => {
+    console.log(filters);
+    const newFilteredPackages = tourPackages.filter((tourPackage) => {
+      return (
+        (filters.category ? tourPackage.category === filters.category : true) &&
+        (filters.themes && filters.themes.length > 0
+          ? tourPackage.themes.some((theme) => filters.themes?.includes(theme))
+          : true) &&
+        (filters.activities && filters.activities.length > 0
+          ? tourPackage.activities.some((activity) => filters.activities?.includes(activity))
+          : true) &&
+        (filters.vehicles && filters.vehicles.length > 0
+          ? tourPackage.vehicles.some((vehicle) => filters.vehicles?.includes(vehicle))
+          : true) &&
+        (filters.features && filters.features.length > 0
+          ? tourPackage.features.some((feature) => filters.features?.includes(feature))
+          : true) &&
+        (filters.discountedPrice ? tourPackage.discountedPrice <= filters.discountedPrice : true) &&
+        (filters.groupSize ? tourPackage.groupSize <= filters.groupSize : true) &&
+        (filters.location && filters.location.length > 0 ? tourPackage.location === filters.location : true)
+      );
+    });
+
+    setFilteredPackages(newFilteredPackages);
+  };
+
+  return (
+    <div className="absolute w-full">
+      <Navbar onSearch={handleSearch} />
+      <main className="flex w-full justify-center flex-wrap">
+        {filteredPackages.map(
+          (
+            tourPackage // Use filteredPackages here
+          ) => (
+            <div
+              className="m-4 h-[350px] min-w-[300px] max-w-[300px] overflow-hidden rounded-xl shadow-md"
+              key={tourPackage.id}
+            >
+              <div>
+                <img src={coast.src} alt="coast" className="w-[300px] h-[150px]" />
+              </div>
+              <div className="h-[200px] w-full p-2 flex flex-col justify-between">
+                <div className="overflow-hidden w-full flex flex-row flex-nowrap text-ellipsi text-sm">
+                  <p className="w-1/2 flex items-center gap-1">
+                    <FontAwesomeIcon icon={faStar} color="gold" />
+                    <strong>{tourPackage.rating}</strong> ({tourPackage.reviews})
+                  </p>
+                  <p className="w-1/2 whitespace-nowrap overflow-hidden text-ellipsis">
+                    <FontAwesomeIcon icon={faLocationDot} color="gold" className="mr-1" />
+                    <span className="inline text-gray-600">{tourPackage.location}</span>
+                  </p>
+                </div>
+                <h1 className="text-lg font-bold font-sans">{tourPackage.title}</h1>
+                <p className="flex justify-end gap-2 items-center">
+                  <span className="line-through text-red-500">
+                    {currency} {tourPackage.originalPrice}
+                  </span>
+                  <span className="rotate-90 text-red-500 text-2xl">&#8599;</span>
+                  <strong>
+                    {currency} {tourPackage.discountedPrice}
+                  </strong>
+                </p>
+                <div className="flex justify-between">
+                  <a className="text-[#F78410] underline items-center">
+                    Details <span className="text-2xl">&#8594;</span>
+                  </a>
+                  <button className="px-2 py-1 my-1 bg-[#F78410] text-white rounded-md text-sm">Book Now</button>
+                </div>
+              </div>
+            </div>
+          )
+        )}
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
