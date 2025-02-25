@@ -26,7 +26,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     discountedPrice: 12500,
     category: "",
     startTime: 720,
-    groupSize: 5,
+    groupSize: 30,
   });
 
   return <FilterContext.Provider value={{ filterForm, setFilterForm }}>{children}</FilterContext.Provider>;

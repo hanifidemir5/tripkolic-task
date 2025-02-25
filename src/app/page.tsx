@@ -11,6 +11,10 @@ import { FilterState } from "./contexts/FilterContext";
 export default function Home() {
   const currency = "THB";
   const [filteredPackages, setFilteredPackages] = useState(tourPackages);
+  const convertTimeStringToMinutes = (timeString: string): number => {
+    const [hours, minutes] = timeString.split(":").map(Number);
+    return hours * 60 + minutes;
+  };
 
   const handleSearch = (filters: FilterState) => {
     console.log(filters);
@@ -31,6 +35,7 @@ export default function Home() {
           : true) &&
         (filters.discountedPrice ? tourPackage.discountedPrice <= filters.discountedPrice : true) &&
         (filters.groupSize ? tourPackage.groupSize <= filters.groupSize : true) &&
+        (filters.startTime ? convertTimeStringToMinutes(tourPackage.startTime) >= filters.startTime : true) &&
         (filters.location && filters.location.length > 0 ? tourPackage.location === filters.location : true)
       );
     });

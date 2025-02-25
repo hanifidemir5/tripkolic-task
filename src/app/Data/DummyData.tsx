@@ -29,8 +29,8 @@ export const tourPackages: TourPackage[] = [
     themes: ["islandTour"],
     vehicles: ["speedboat"],
     category: "Tours",
-    startTime: "08:00 AM",
-    groupSize: 25,
+    startTime: "08:00",
+    groupSize: 5,
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ export const tourPackages: TourPackage[] = [
     themes: ["islandTour", "historicalTour"],
     vehicles: ["speedboat"],
     category: "Tours",
-    startTime: "09:00 AM",
+    startTime: "09:00",
     groupSize: 20,
   },
   {
@@ -61,8 +61,8 @@ export const tourPackages: TourPackage[] = [
     themes: ["islandTour"],
     vehicles: ["speedboat", "yacht"],
     category: "Tours",
-    startTime: "07:30 AM",
-    groupSize: 30,
+    startTime: "07:30",
+    groupSize: 15,
   },
   {
     id: 4,
@@ -77,7 +77,7 @@ export const tourPackages: TourPackage[] = [
     themes: ["safari"],
     vehicles: ["jeep"],
     category: "Transportation",
-    startTime: "10:00 AM",
+    startTime: "10:00",
     groupSize: 15,
   },
   {
@@ -93,8 +93,8 @@ export const tourPackages: TourPackage[] = [
     themes: ["cityTour", "historicalTour"],
     vehicles: ["bus"],
     category: "Tours",
-    startTime: "09:30 AM",
-    groupSize: 40,
+    startTime: "09:30",
+    groupSize: 10,
   },
   {
     id: 6,
@@ -109,7 +109,7 @@ export const tourPackages: TourPackage[] = [
     themes: ["foodTour"],
     vehicles: ["walking"],
     category: "Activities",
-    startTime: "05:00 PM",
+    startTime: "05:00",
     groupSize: 12,
   },
   {
@@ -125,8 +125,8 @@ export const tourPackages: TourPackage[] = [
     themes: ["riverCruise", "foodTour"],
     vehicles: ["boat"],
     category: "Hotels",
-    startTime: "07:00 AM",
-    groupSize: 30,
+    startTime: "07:00",
+    groupSize: 15,
   },
   {
     id: 8,
@@ -141,7 +141,7 @@ export const tourPackages: TourPackage[] = [
     themes: ["mountainTrek"],
     vehicles: ["walking"],
     category: "Activities",
-    startTime: "06:30 AM",
+    startTime: "06:30",
     groupSize: 15,
   },
   {
@@ -157,7 +157,7 @@ export const tourPackages: TourPackage[] = [
     themes: ["desertSafari"],
     vehicles: ["jeep", "camel"],
     category: "Activities",
-    startTime: "04:00 PM",
+    startTime: "04:00",
     groupSize: 20,
   },
   {
@@ -173,7 +173,7 @@ export const tourPackages: TourPackage[] = [
     themes: ["historicalTour", "riverCruise"],
     vehicles: ["boat", "bus"],
     category: "Tours",
-    startTime: "08:30 AM",
-    groupSize: 35,
+    startTime: "08:30",
+    groupSize: 5,
   },
 ];
