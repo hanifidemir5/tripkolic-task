@@ -5,10 +5,9 @@ export type TourismCategory = {
 
 const tourismCategories: TourismCategory[] = [
   { id: 1, name: "Tours" },
-  { id: 2, name: "Hotels" },
-  { id: 3, name: "Restaurants" },
-  { id: 4, name: "Activities" },
-  { id: 5, name: "Transportation" },
+  { id: 2, name: "Tickets" },
+  { id: 3, name: "Rent" },
+  { id: 4, name: "Transfer" },
 ];
 
 export default tourismCategories;
